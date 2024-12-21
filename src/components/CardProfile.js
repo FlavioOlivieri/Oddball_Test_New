@@ -7,11 +7,11 @@ import '../css/Card.css';
 import profilo from '../assets/profile.png';
 import '../css/CardProfile.css';
 
-export default function AdvancedDemo() {
+export default function AdvancedDemo({ reactionTime, flagRare }) {
     const [userData, setUserData] = useState(null);  // Stato per i dati dell'utente
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [reactionTime, setReactionTime] = useState(0);
-    const [flagRare, setFlagRare] = useState(0);
+    // const [reactionTime, setReactionTime] = useState(0);
+    // const [flagRare, setFlagRare] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {

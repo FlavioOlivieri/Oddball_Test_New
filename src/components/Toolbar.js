@@ -9,6 +9,9 @@ import { Button } from 'primereact/button';
 export default function Bar() {
     const [showCard, setShowCard] = useState(null);
     const [startImageSequence, setStartImageSequence] = useState(false);
+    const [reactionTime, setReactionTime] = useState(0);
+    const [flagRare, setFlagRare] = useState(0);
+    const [imageSequenceComplete, setImageSequenceComplete] = useState(false);
 
     const handlePlayClick = () => {
         setStartImageSequence(false);
@@ -23,6 +26,14 @@ export default function Bar() {
         setShowCard(null);
         setStartImageSequence(false);
     };
+
+    const handleDataFromImageSequence = (data) => {
+        console.log("Dati ricevuti da ImageSequence:", data);
+        setReactionTime(data.reactionTime);
+        setFlagRare(data.flagRare);
+        setImageSequenceComplete(true);
+    };
+
 
     const centerContent = (
         <div className="center">
@@ -45,8 +56,15 @@ export default function Bar() {
             <div className="div-bar">
                 <Toolbar center={centerContent} className="bar" />
                 {showCard === 'settings' && <CardSettings />}
-                {showCard === 'play' && <ImageSequence onStart={startImageSequence} />}
-                {showCard === 'profile' && <CardProfile />}
+                {showCard === 'play' && (
+                    <ImageSequence
+                        onStart={startImageSequence}
+                        onComplete={handleDataFromImageSequence}
+                    />
+                )}
+                {showCard === 'profile' && (
+                    <CardProfile reactionTime={reactionTime} flagRare={flagRare} />
+                )}
             </div>
             <Button className="button-home" icon="pi pi-home" onClick={handleHomeClick} />
         </>

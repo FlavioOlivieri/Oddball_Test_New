@@ -72,8 +72,9 @@ function ImageSequence({ onComplete = () => { }, onStart }) {
             const averageReactionTime = totalTime / timeStampArray.length || 0;
             setReactionTime(averageReactionTime);
 
-            // Call onComplete with the final data
-            onComplete({ reactionTime: averageReactionTime, flagRare });
+            const result = { reactionTime: averageReactionTime, flagRare };
+            console.log("Dati passati a onComplete:", result);
+            onComplete(result);
         }
     }, [currentSequence, resultsVisible]);
 
